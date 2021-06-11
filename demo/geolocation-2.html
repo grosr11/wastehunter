@@ -63,9 +63,9 @@
       if ('geolocation' in navigator)
         button.addEventListener('click', () => {
           if (watch) {
+            button.innerText = 'watchPosition';
             navigator.geolocation.clearWatch(watch);
             watch = undefined;
-            button.innerText = 'watchPosition';
             return;
           }
           watch = navigator.geolocation.watchPosition(
@@ -73,8 +73,9 @@
               coords: { latitude, longitude, accuracy, speed },
               timestamp,
             }) => {
+              button.innerText = 'clearWatch';
               map.flyTo({ center: [longitude, latitude], zoom: 17, speed: 3 });
-              marker.setLngLat([longitude, latitude]).addTo(map);
+              if (!watch) marker.setLngLat([longitude, latitude]).addTo(map);
               popup.setText(
                 `latitude: ${latitude}
                 longitude: ${longitude}
@@ -82,8 +83,7 @@
                 speed: ${speed || 0} m/s
                 time: ${new Date(timestamp).toLocaleString()}`
               );
-              if (!popup.isOpen()) marker.togglePopup();
-              button.innerText = 'clearWatch';
+              if (!watch && !popup.isOpen()) marker.togglePopup();
             },
             (e) => e.message && alert(e.message),
             {
