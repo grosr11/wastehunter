@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Geolocation - API</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.js"></script>
+    <style>
+      body {
+        padding: 20px;
+        font: 14px sans-serif;
+        color: #333;
+      }
+      h1 {
+        font-size: 2em;
+        color: #005a9c;
+      }
+      h2 {
+        margin: 1em 0 0.75em;
+        font-size: 1.5em;
+        font-weight: normal;
+        color: #005a9c;
+      }
+      a {
+        color: #d0454c;
+      }
+      a[href^='http'] {
+        color: #005a9c;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Geolocation API</h1>
+    <h2>Verwenden von geolocation</h2>
+    <p>
+      Die "geolocation"-API ermöglicht es Nutzern, einer Web-Applikation die
+      eigene Position mitzuteilen. Um die Privatsphäre des Nutzers zu schützen,
+      wird dieser vorher um Erlaubnis gebeten und muss der Übermittlung
+      zustimmen.
+    </p>
+    <h2>Das geolocation-Objekt</h2>
+    <p>
+      Die geolocation-API wird durch das navigator.geolocation-Objekt
+      offengelegt.
+    </p>
+    <p>
+      Wenn das Objekt existiert, sind die geolocation-Services vorhanden und
+      nutzbar. Sie können die Funktionstüchtigkeit daher wie folgt testen:
+    </p>
+    <h2>Die derzeitige Position abfragen</h2>
+    <a href="geolocation-1.html">Demo getCurrentPosition</a>
+    <p>
+      Um die derzeitige Position des Nutzers zu erhalten, können Sie die Methode
+      getCurrentPosition() aufrufen. Dies startet eine asynchrone Anfrage für
+      den Abruf der Position zu initiieren. Wenn die Position erhalten wurde,
+      wird die übergebene Callback-Funktion ausgeführt. Sie können optional auch
+      eine zweite Callback-Funktion übergeben, welche im Falle eines Fehlers
+      ausgeführt wird. Ein dritter, optionaler Parameter ist ein
+      Konfigurationsobjekt, in dem Sie das maximale Alter der zurückgegeben
+      Position, die maximale Wartezeit für die Anfrage und den Wunsch für eine
+      hohe Genauigkeit festlegegen können.
+    </p>
+    <p>
+      Notiz: Standardmäßig versucht getCurrentPosition() so schnell wie möglich
+      mit einer geringen Genauigkeit zu antworten. Es ist nützlich wenn Sie eine
+      schnelle Antwort benötigen, unabhängig von der Genauigkeit. Beispielsweise
+      Geräte mit einem GPS können eine Minute oder länger benötigen um eine neue
+      Position zu erhalten, also kann es möglich sein, dass weniger genaue Daten
+      (Ort der IP oder von WLANs) zurückgegeben werden.
+    </p>
+    <h2>Die derzeitige Position überwachen</h2>
+    <p><a href="geolocation-2.html">Demo watchPosition</a></p>
+    <p>
+      Wenn sich die Positionsdaten ändern (entweder über die Bewegung des
+      Gerätes oder den Erhalt genauere Geolokationsdaten), können Sie eine
+      Callback-Funktion erstellen, die mit der erneuerten Positionsinformation
+      arbeitet. Dies ist über die Funktion watchPosition() möglich, welche die
+      gleichen Eingabeparameter wie getCurrentPosition(). besitzt. Die
+      Callback-Funktion wird mehrere Male ausgeführt, dies erlaubt dem Browser
+      die Position aufgrund von Bewegungen oder genaueren Positionsdaten, durch
+      das Verwenden von anderen (langsameren) Methoden, zu erneuern. Die
+      Fehler-Callback-Funktion, welche wie auch in getCurrentPosition(), hier
+      optional ist, kann auch mehrfach aufgerufen werden.
+    </p>
+    <p>
+      Notiz: Sie können watchPosition() auch ohne ein vorangestellten Aufruf von
+      getCurrentPosition() nutzen.
+    </p>
+    <p>
+      Die Methode watchPosition() gibt eine numerische ID zurück, die für die
+      eindeutige Identifikation des Positionsüberwachers verwendet werden kann;
+      diese können Sie in der Methode clearWatch() nutzen, um die
+      Positionsüberwachung zu beenden.
+    </p>
+    <h2>Siehe auch</h2>
+    <p>
+      <a href="https://developer.mozilla.org/de/docs/Web/API/Geolocation_API"
+        >https://developer.mozilla.org/de/docs/Web/API/Geolocation_API</a
+      >
+    </p>
+    <p>
+      <a href="https://www.w3.org/TR/geolocation/"
+        >https://www.w3.org/TR/geolocation/</a
+      >
+    </p>
+  </body>
+</html>

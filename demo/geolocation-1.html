@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Geolocation - getCurrentPosition</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+      }
+      #map {
+        width: 100%;
+        height: 100%;
+      }
+      #get {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        border: 0;
+        border-radius: 4px;
+        padding: 10px;
+        font: bold 14px sans-serif;
+        color: rgba(0, 0, 0, 0.847);
+        background: #fff;
+        box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+      }
+      .mapboxgl-popup-content {
+        white-space: pre-line;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <button id="get">getCurrentPosition</button>
+    <script>
+      const map = new mapboxgl.Map({
+        accessToken:
+          'pk.eyJ1Ijoid2FzdGVodW50ZXIiLCJhIjoiY2twcnkzMTZsMGpqazJ3cWt3MjVrZjhnbSJ9.KGIJ7Me0wtMYGFEc0gPkjg',
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [8, 47],
+        zoom: 8,
+      }).addControl(new mapboxgl.NavigationControl(), 'top-left');
+      const popup = new mapboxgl.Popup({
+        focusAfterOpen: false,
+      });
+      const marker = new mapboxgl.Marker().setPopup(popup);
+      const button = document.getElementById('get');
+
+      if ('geolocation' in navigator)
+        button.addEventListener('click', () => {
+          navigator.geolocation.getCurrentPosition(
+            ({ coords: { latitude, longitude, accuracy } }) => {
+              map.flyTo({ center: [longitude, latitude], zoom: 17, speed: 3 });
+              marker.setLngLat([longitude, latitude]).addTo(map);
+              popup.setText(
+                `latitude: ${latitude}\nlongitude: ${longitude}\naccuracy: ${accuracy}`
+              );
+              if (!popup.isOpen()) marker.togglePopup();
+            },
+            (e) => alert(e.message)
+          );
+        });
+    </script>
+  </body>
+</html>
+
+<!--
+https://developer.mozilla.org/de/docs/Web/API/Geolocation_API
+
+Verwenden von geolocation
+Die "geolocation"-API ermöglicht es Nutzern, einer Web-Applikation die eigene Position mitzuteilen. Um die Privatsphäre des Nutzers zu schützen, wird dieser vorher um Erlaubnis gebeten und muss der Übermittlung zustimmen.
+
+Das geolocation-Objekt
+Die geolocation-API wird durch das navigator.geolocation-Objekt offengelegt.
+
+Wenn das Objekt existiert, sind die geolocation-Services vorhanden und nutzbar. Sie können die Funktionstüchtigkeit daher wie folgt testen:
+
+
+Die derzeitige Position abfragen
+Um die derzeitige Position des Nutzers zu erhalten, können Sie die Methode getCurrentPosition() aufrufen. Dies startet eine asynchrone Anfrage für den Abruf der Position zu initiieren. Wenn die Position erhalten wurde, wird die übergebene Callback-Funktion ausgeführt. Sie können optional auch eine zweite Callback-Funktion übergeben, welche im Falle eines Fehlers ausgeführt wird. Ein dritter, optionaler Parameter ist ein Konfigurationsobjekt, in dem Sie das maximale Alter der zurückgegeben Position, die maximale Wartezeit für die Anfrage und den Wunsch für eine hohe Genauigkeit festlegegen können.
+
+Notiz: Standardmäßig versucht getCurrentPosition() so schnell wie möglich mit einer geringen Genauigkeit zu antworten. Es ist nützlich wenn Sie eine schnelle Antwort benötigen, unabhängig von der Genauigkeit. Beispielsweise Geräte mit einem GPS können eine Minute oder länger benötigen um eine neue Position zu erhalten, also kann es möglich sein, dass weniger genaue Daten (Ort der IP oder von WLANs) zurückgegeben werden.
+
+https://www.w3.org/TR/geolocation/
+-->
+
+<!-- 
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Geolocation - getCurrentPosition</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+    <link
+      rel="stylesheet"
+      href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css"
+    />
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+      }
+      #map {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      const map = L.map('map').setView([47, 8], 8);
+      L.tileLayer(
+        'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoid2FzdGVodW50ZXIiLCJhIjoiY2twcnkzMTZsMGpqazJ3cWt3MjVrZjhnbSJ9.KGIJ7Me0wtMYGFEc0gPkjg',
+        {
+          id: 'mapbox/streets-v11',
+          tileSize: 512,
+          zoomOffset: -1,
+        }
+      ).addTo(map);
+
+      if ('geolocation' in navigator) {
+        navigator.geolocation.getCurrentPosition(
+          ({ coords: { latitude, longitude, accuracy } }) => {
+            map.setView([latitude, longitude], 17);
+            L.marker([latitude, longitude])
+              .addTo(map)
+              .bindPopup(
+                `<b>position coords</b><br>latitude: ${latitude}<br>longitude: ${longitude}<br>accuracy: ${accuracy}`
+              )
+              .openPopup();
+          },
+          (e) => alert(e.message)
+        );
+      } else {
+        alert('geolocation not supportet');
+      }
+    </script>
+  </body>
+</html>
+-->
