@@ -64,14 +64,13 @@
               rotationRate: r = {},
               interval: i,
             }) => {
-              // image.style.transform = `rotateZ(${alpha}deg) rotateX(${-beta}deg) rotateY(${gamma}deg)`;
               values.innerText = `
                 acceleration
                 .x: ${Math.round(a.x * 100) / 100} m/sec²
                 .y: ${Math.round(a.y * 100) / 100} m/sec²
                 .z: ${Math.round(a.z * 100) / 100} m/sec²
 
-                accelerationWithGravity
+                accelerationIncludingGravity
                 .x: ${Math.round(g.x * 100) / 100} m/sec²
                 .y: ${Math.round(g.y * 100) / 100} m/sec²
                 .z: ${Math.round(g.z * 100) / 100} m/sec²
