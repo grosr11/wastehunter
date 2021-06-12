@@ -57,7 +57,7 @@
       }).addControl(new mapboxgl.NavigationControl(), 'top-left');
       const marker = new mapboxgl.Marker();
       const button = document.getElementById('button');
-      let init, watch;
+      let watch;
 
       if ('geolocation' in navigator)
         button.addEventListener('click', () => {
@@ -73,12 +73,11 @@
               timestamp,
             }) => {
               button.innerText = 'clearWatch';
-              if (!init)
-                map.flyTo({
-                  center: [longitude, latitude],
-                  zoom: 17,
-                  speed: 3,
-                });
+              map.flyTo({
+                center: [longitude, latitude],
+                zoom: 17,
+                speed: 3,
+              });
               marker
                 .setLngLat([longitude, latitude])
                 .setPopup(
@@ -95,11 +94,8 @@
                 .addTo(map)
                 .togglePopup();
             },
-            (e) =>
-              e.message &&
-              alert(e.message, {
-                enableHighAccuracy: true,
-              })
+            (e) => e.message && alert(e.message),
+            { enableHighAccuracy: true }
           );
         });
     </script>
