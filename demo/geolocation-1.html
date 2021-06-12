@@ -18,12 +18,13 @@
         margin: 0;
         padding: 0;
         height: 100%;
+        background: #ccc;
       }
       #map {
         width: 100%;
         height: 100%;
       }
-      #get {
+      #button {
         position: absolute;
         top: 10px;
         right: 10px;
@@ -31,7 +32,7 @@
         border-radius: 4px;
         padding: 10px;
         font: bold 14px sans-serif;
-        color: rgba(0, 0, 0, 0.847);
+        color: #333;
         background: #fff;
         box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
         cursor: pointer;
@@ -43,7 +44,7 @@
   </head>
   <body>
     <div id="map"></div>
-    <button id="get">getCurrentPosition</button>
+    <button id="button">getCurrentPosition</button>
     <script>
       const map = new mapboxgl.Map({
         accessToken:
@@ -57,7 +58,7 @@
         focusAfterOpen: false,
       });
       const marker = new mapboxgl.Marker().setPopup(popup);
-      const button = document.getElementById('get');
+      const button = document.getElementById('button');
 
       if ('geolocation' in navigator)
         button.addEventListener('click', () => {

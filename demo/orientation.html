@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Orientation</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background: #ccc;
+      }
+      #image {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        opacity: 0.5;
+      }
+      #values {
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 4px;
+        padding: 10px;
+        font: 14px sans-serif;
+        white-space: pre-line;
+        color: #333;
+        background: #fff;
+        box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+      }
+      #button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        border: 0;
+        border-radius: 4px;
+        padding: 10px;
+        font: bold 14px sans-serif;
+        color: #333;
+        background: #fff;
+        box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <img
+      id="image"
+      src="https://upload.wikimedia.org/wikipedia/commons/1/1a/Brosen_windrose.svg"
+    />
+    <div id="values"></div>
+    <button id="button">deviceorientation</button>
+    <script>
+      const image = document.getElementById('image'),
+        values = document.getElementById('values'),
+        button = document.getElementById('button');
+
+      if (window.DeviceOrientationEvent)
+        button.addEventListener('click', () => {
+          window.addEventListener(
+            'deviceorientation',
+            ({ absolute, alpha, beta, gamma }) => {
+              // image.style.transform = `rotate(-${alpha}deg) scale(${Math.cos(
+              //   (beta * Math.PI) / 180
+              // )}, ${Math.cos((gamma * Math.PI) / 180)})`;
+              image.style.transform = `rotateZ(${-alpha}deg) rotateX(${-beta}deg) rotateY(${gamma}deg)`;
+              image.style.display = 'block';
+              values.innerText = `absolute: ${absolute}
+                alpha: ${alpha}°
+                beta: ${beta}°
+                gamma: ${gamma}°`;
+            },
+            true
+          );
+        });
+    </script>
+  </body>
+</html>

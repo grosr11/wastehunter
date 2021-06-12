@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Geolocation - API</title>
+    <title>Web APIs</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1.0" />
     <style>
@@ -10,11 +10,12 @@
         font: 14px sans-serif;
         color: #333;
       }
-      h1 {
+      h2 {
+        margin: 1em 0 0.5em;
         font-size: 2em;
         color: #005a9c;
       }
-      h2 {
+      h3 {
         margin: 1em 0 0.75em;
         font-size: 1.5em;
         font-weight: normal;
@@ -29,15 +30,15 @@
     </style>
   </head>
   <body>
-    <h1>Geolocation API</h1>
-    <h2>Verwenden von geolocation</h2>
+    <h2>Geolocation</h2>
+    <h3>Verwenden von geolocation</h3>
     <p>
       Die "geolocation"-API ermöglicht es Nutzern, einer Web-Applikation die
       eigene Position mitzuteilen. Um die Privatsphäre des Nutzers zu schützen,
       wird dieser vorher um Erlaubnis gebeten und muss der Übermittlung
       zustimmen.
     </p>
-    <h2>Das geolocation-Objekt</h2>
+    <h3>Das geolocation-Objekt</h3>
     <p>
       Die geolocation-API wird durch das navigator.geolocation-Objekt
       offengelegt.
@@ -46,7 +47,7 @@
       Wenn das Objekt existiert, sind die geolocation-Services vorhanden und
       nutzbar. Sie können die Funktionstüchtigkeit daher wie folgt testen:
     </p>
-    <h2>Die derzeitige Position abfragen</h2>
+    <h3>Die derzeitige Position abfragen</h3>
     <a href="geolocation-1.html">Demo getCurrentPosition</a>
     <p>
       Um die derzeitige Position des Nutzers zu erhalten, können Sie die Methode
@@ -67,7 +68,7 @@
       Position zu erhalten, also kann es möglich sein, dass weniger genaue Daten
       (Ort der IP oder von WLANs) zurückgegeben werden.
     </p>
-    <h2>Die derzeitige Position überwachen</h2>
+    <h3>Die derzeitige Position überwachen</h3>
     <p><a href="geolocation-2.html">Demo watchPosition</a></p>
     <p>
       Wenn sich die Positionsdaten ändern (entweder über die Bewegung des
@@ -87,7 +88,7 @@
       diese können Sie in der Methode clearWatch() nutzen, um die
       Positionsüberwachung zu beenden.
     </p>
-    <h2>Siehe auch</h2>
+    <h3>Siehe auch</h3>
     <p>
       <a href="https://developer.mozilla.org/de/docs/Web/API/Geolocation_API"
         >https://developer.mozilla.org/de/docs/Web/API/Geolocation_API</a
@@ -96,6 +97,61 @@
     <p>
       <a href="https://www.w3.org/TR/geolocation/"
         >https://www.w3.org/TR/geolocation/</a
+      >
+    </p>
+
+    <h2>Device Orientation</h2>
+    <h3>Window: deviceorientation event</h3>
+    <p><a href="orientation.html">Demo orientation</a></p>
+    <p>
+      The deviceorientation event is fired when fresh data is available from an
+      orientation sensor about the current orientation of the device as compared
+      to the Earth coordinate frame. This data is gathered from a magnetometer
+      inside the device. See Orientation and motion data explained for details.
+    </p>
+    <h3>See also</h3>
+    <p>
+      <a
+        href="https://developer.mozilla.org/en-US/docs/Web/API/Window/deviceorientation_event"
+        >https://developer.mozilla.org/en-US/docs/Web/API/Window/deviceorientation_event</a
+      >
+    </p>
+    <p>
+      <a href="https://w3c.github.io/deviceorientation/#deviceorientation"
+        >https://w3c.github.io/deviceorientation/#deviceorientation</a
+      >
+    </p>
+    <p>
+      <a
+        href="https://developer.mozilla.org/en-US/docs/Web/Events/Orientation_and_motion_data_explained"
+        >https://developer.mozilla.org/en-US/docs/Web/Events/Orientation_and_motion_data_explained</a
+      >
+    </p>
+
+    <h2>Device Motion</h2>
+    <h3>Window: devicemotion event</h3>
+    <p>
+      The devicemotion event is fired at a regular interval and indicates the
+      amount of physical force of acceleration the device is receiving at that
+      time. It also provides information about the rate of rotation, if
+      available.
+    </p>
+    <h3>See also</h3>
+    <p>
+      <a
+        href="https://developer.mozilla.org/en-US/docs/Web/API/Window/devicemotion_event"
+        >https://developer.mozilla.org/en-US/docs/Web/API/Window/devicemotion_event</a
+      >
+    </p>
+    <p>
+      <a href="https://w3c.github.io/deviceorientation/#devicemotion"
+        >https://w3c.github.io/deviceorientation/#devicemotion</a
+      >
+    </p>
+    <p>
+      <a
+        href="https://developer.mozilla.org/en-US/docs/Web/Events/Orientation_and_motion_data_explained"
+        >https://developer.mozilla.org/en-US/docs/Web/Events/Orientation_and_motion_data_explained</a
       >
     </p>
   </body>
