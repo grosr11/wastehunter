@@ -64,20 +64,22 @@
 
       if (window.DeviceOrientationEvent)
         button.addEventListener('click', () => {
+          if (DeviceOrientationEvent.requestPermission)
+            DeviceOrientationEvent.requestPermission().then((s) => {
+              if (s !== 'granted') alert('Permission not granted');
+            });
           window.addEventListener(
             'deviceorientation',
-            ({ absolute, alpha, beta, gamma }) => {
+            ({ alpha, beta, gamma }) => {
               // image.style.transform = `rotate(-${alpha}deg) scale(${Math.cos(
               //   (beta * Math.PI) / 180
               // )}, ${Math.cos((gamma * Math.PI) / 180)})`;
               image.style.transform = `rotateZ(${-alpha}deg) rotateX(${-beta}deg) rotateY(${gamma}deg)`;
-              image.style.display = 'block';
-              values.innerText = `absolute: ${absolute}
-                alpha: ${alpha}°
-                beta: ${beta}°
-                gamma: ${gamma}°`;
-            },
-            true
+              values.innerText = `alpha: ${alpha} °
+                beta: ${beta} °
+                gamma: ${gamma} °`;
+              values.style.display = 'block';
+            }
           );
         });
     </script>

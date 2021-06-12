@@ -100,7 +100,7 @@
       >
     </p>
 
-    <h2>Device Orientation</h2>
+    <h2>Device Orientation & Motion</h2>
     <h3>Window: deviceorientation event</h3>
     <p><a href="orientation.html">Demo orientation</a></p>
     <p>
@@ -109,6 +109,25 @@
       to the Earth coordinate frame. This data is gathered from a magnetometer
       inside the device. See Orientation and motion data explained for details.
     </p>
+
+    <h3>Window: devicemotion event</h3>
+    <p>
+      The devicemotion event is fired at a regular interval and indicates the
+      amount of physical force of acceleration the device is receiving at that
+      time. It also provides information about the rate of rotation, if
+      available.
+    </p>
+    <h3>Notes</h3>
+    <p>
+      For environments closely follow updatd specification (such as iOS 13+),
+      the page must request a permission first by calling requestPermission().
+      The permission can only be brought up from a user gesture (tap/click).
+    </p>
+    <p>
+      As per security considerations, iOS will auto-decline the
+      requestPermission call if the page is not loaded over HTTPS.
+    </p>
+
     <h3>See also</h3>
     <p>
       <a
@@ -121,22 +140,6 @@
         >https://w3c.github.io/deviceorientation/#deviceorientation</a
       >
     </p>
-    <p>
-      <a
-        href="https://developer.mozilla.org/en-US/docs/Web/Events/Orientation_and_motion_data_explained"
-        >https://developer.mozilla.org/en-US/docs/Web/Events/Orientation_and_motion_data_explained</a
-      >
-    </p>
-
-    <h2>Device Motion</h2>
-    <h3>Window: devicemotion event</h3>
-    <p>
-      The devicemotion event is fired at a regular interval and indicates the
-      amount of physical force of acceleration the device is receiving at that
-      time. It also provides information about the rate of rotation, if
-      available.
-    </p>
-    <h3>See also</h3>
     <p>
       <a
         href="https://developer.mozilla.org/en-US/docs/Web/API/Window/devicemotion_event"
@@ -152,6 +155,12 @@
       <a
         href="https://developer.mozilla.org/en-US/docs/Web/Events/Orientation_and_motion_data_explained"
         >https://developer.mozilla.org/en-US/docs/Web/Events/Orientation_and_motion_data_explained</a
+      >
+    </p>
+    <p>
+      <a
+        href="https://developers.google.com/web/fundamentals/native-hardware/device-orientation"
+        >https://developers.google.com/web/fundamentals/native-hardware/device-orientation</a
       >
     </p>
   </body>
