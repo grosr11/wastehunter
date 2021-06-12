@@ -60,7 +60,7 @@
             'devicemotion',
             ({
               acceleration: a = {},
-              accelerationWithGravity: g = {},
+              accelerationIncludingGravity: g = {},
               rotationRate: r = {},
               interval: i,
             }) => {
@@ -70,16 +70,18 @@
                 .x: ${Math.round(a.x * 100) / 100} m/sec²
                 .y: ${Math.round(a.y * 100) / 100} m/sec²
                 .z: ${Math.round(a.z * 100) / 100} m/sec²
+
                 accelerationWithGravity
                 .x: ${Math.round(g.x * 100) / 100} m/sec²
                 .y: ${Math.round(g.y * 100) / 100} m/sec²
                 .z: ${Math.round(g.z * 100) / 100} m/sec²
+
                 rotationRate
                 .alpha: ${Math.round(r.alpha * 100) / 100} °/sec
                 .beta: ${Math.round(r.beta * 100) / 100} °/sec
                 .gamma: ${Math.round(r.gamma * 100) / 100} °/sec
-                interval
-                ${Math.round(i * 100) / 100} ms
+
+                interval: ${Math.round(i * 100) / 100} ms
               `.trim();
               values.style.display = 'block';
             }
