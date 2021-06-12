@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Motion</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        font: 14px sans-serif;
+        color: #333;
+        background: #ccc;
+      }
+      #values {
+        display: none;
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        width: 200px;
+        border-radius: 4px;
+        padding: 10px;
+        white-space: pre-line;
+        background: #fff;
+        box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+      }
+      #button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        border: 0;
+        border-radius: 4px;
+        padding: 10px;
+        font-weight: bold;
+        background: #fff;
+        box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="values"></div>
+    <button id="button">devicemotion</button>
+    <script>
+      const values = document.getElementById('values'),
+        button = document.getElementById('button');
+
+      if (window.DeviceMotionEvent)
+        button.addEventListener('click', () => {
+          if (DeviceMotionEvent.requestPermission)
+            DeviceMotionEvent.requestPermission().then((s) => {
+              if (s !== 'granted') alert('Permission not granted');
+            });
+          window.addEventListener(
+            'devicemotion',
+            ({
+              acceleration: a = {},
+              accelerationWithGravity: g = {},
+              rotationRate: r = {},
+              interval: i,
+            }) => {
+              // image.style.transform = `rotateZ(${alpha}deg) rotateX(${-beta}deg) rotateY(${gamma}deg)`;
+              values.innerText = `
+                acceleration
+                .x: ${Math.round(a.x * 100) / 100} m/sec²
+                .y: ${Math.round(a.y * 100) / 100} m/sec²
+                .z: ${Math.round(a.z * 100) / 100} m/sec²
+                accelerationWithGravity
+                .x: ${Math.round(g.x * 100) / 100} m/sec²
+                .y: ${Math.round(g.y * 100) / 100} m/sec²
+                .z: ${Math.round(g.z * 100) / 100} m/sec²
+                rotationRate
+                .alpha: ${Math.round(r.alpha * 100) / 100} °/sec
+                .beta: ${Math.round(r.beta * 100) / 100} °/sec
+                .gamma: ${Math.round(r.gamma * 100) / 100} °/sec
+                interval
+                ${Math.round(i * 100) / 100} ms
+              `.trim();
+              values.style.display = 'block';
+            }
+          );
+        });
+    </script>
+  </body>
+</html>
