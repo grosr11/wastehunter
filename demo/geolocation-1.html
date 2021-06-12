@@ -54,10 +54,7 @@
         center: [8, 47],
         zoom: 8,
       }).addControl(new mapboxgl.NavigationControl(), 'top-left');
-      const popup = new mapboxgl.Popup({
-        focusAfterOpen: false,
-      });
-      const marker = new mapboxgl.Marker().setPopup(popup);
+      const marker = new mapboxgl.Marker();
       const button = document.getElementById('button');
 
       if ('geolocation' in navigator)
@@ -65,11 +62,19 @@
           navigator.geolocation.getCurrentPosition(
             ({ coords: { latitude, longitude, accuracy } }) => {
               map.flyTo({ center: [longitude, latitude], zoom: 17, speed: 3 });
-              marker.setLngLat([longitude, latitude]).addTo(map);
-              popup.setText(
-                `latitude: ${latitude}\nlongitude: ${longitude}\naccuracy: ${accuracy}`
-              );
-              if (!popup.isOpen()) marker.togglePopup();
+              marker
+                .setLngLat([longitude, latitude])
+                .setPopup(
+                  new mapboxgl.Popup({
+                    focusAfterOpen: false,
+                  }).setText(
+                    `latitude: ${latitude}
+                longitude: ${longitude}
+                accuracy: ${Math.round(accuracy * 100) / 100} m`
+                  )
+                )
+                .addTo(map)
+                .togglePopup();
             },
             (e) => alert(e.message)
           );

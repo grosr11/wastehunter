@@ -28,6 +28,7 @@
         left: 50%;
         transform: translate(-50%, -50%);
         border-radius: 4px;
+        min-width: 8em;
         padding: 10px;
         font: 14px sans-serif;
         white-space: pre-line;
@@ -71,13 +72,10 @@
           window.addEventListener(
             'deviceorientation',
             ({ alpha, beta, gamma }) => {
-              // image.style.transform = `rotate(-${alpha}deg) scale(${Math.cos(
-              //   (beta * Math.PI) / 180
-              // )}, ${Math.cos((gamma * Math.PI) / 180)})`;
-              image.style.transform = `rotateZ(${-alpha}deg) rotateX(${-beta}deg) rotateY(${gamma}deg)`;
-              values.innerText = `alpha: ${alpha} °
-                beta: ${beta} °
-                gamma: ${gamma} °`;
+              image.style.transform = `rotateZ(${alpha}deg) rotateX(${-beta}deg) rotateY(${gamma}deg)`;
+              values.innerText = `alpha: ${Math.round(alpha * 100) / 100}°
+                beta: ${Math.round(beta * 100) / 100}°
+                gamma: ${Math.round(gamma * 100) / 100}°`;
               values.style.display = 'block';
             }
           );
