@@ -14,17 +14,12 @@
         color: #333;
         background: #ccc;
       }
-      #values {
-        display: none;
-        position: absolute;
-        bottom: 10px;
-        left: 10px;
-        width: 200px;
-        border-radius: 4px;
-        padding: 10px;
-        white-space: pre-line;
-        background: #fff;
-        box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 50px 150px;
+        box-sizing: border-box;
       }
       #button {
         position: absolute;
@@ -38,10 +33,38 @@
         box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
         cursor: pointer;
       }
+      #values {
+        width: 100%;
+      }
+      #values p {
+        margin: 1em 0 0.5em;
+      }
+      #values div {
+        margin: 0.5em 0;
+        padding: 0.1em 0.3em;
+        border-radius: 4px;
+        background: #fff;
+        box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+        background: linear-gradient(to right, #fff, #c22 50%, #070 50%, #fff) 50% 0/50% 100% no-repeat #fff;
+        background-position: 50% 0;
+      }
     </style>
   </head>
   <body>
-    <div id="values"></div>
+    <div id="values">
+      <p>acceleration</p>
+      <div class="acceleration x">x</div>
+      <div class="acceleration y">y</div>
+      <div class="acceleration z">z</div>
+      <p>accelerationIncludingGravity</p>
+      <div class="accelerationIncludingGravity x">x</div>
+      <div class="accelerationIncludingGravity y">y</div>
+      <div class="accelerationIncludingGravity z">z</div>
+      <p>rotationRate</p>
+      <div class="rotationRate alpha">alpha</div>
+      <div class="rotationRate beta">beta</div>
+      <div class="rotationRate gamma">gamma</div>
+    </div>
     <button id="button">devicemotion</button>
     <script>
       const values = document.getElementById('values'),
@@ -50,33 +73,29 @@
       if (window.DeviceMotionEvent)
         button.addEventListener('click', () => {
           if (DeviceMotionEvent.requestPermission)
-            DeviceMotionEvent.requestPermission().then((s) => {
-              if (s !== 'granted') alert('Permission not granted');
+            DeviceMotionEvent.requestPermission().then((p) => {
+              if (p !== 'granted') alert('Permission not granted');
             });
-          window.addEventListener(
-            'devicemotion',
-            ({ acceleration: a = {}, accelerationIncludingGravity: g = {}, rotationRate: r = {}, interval: i }) => {
-              values.innerText = `
-                acceleration
-                .x: ${Math.round(a.x * 100) / 100} m/sec²
-                .y: ${Math.round(a.y * 100) / 100} m/sec²
-                .z: ${Math.round(a.z * 100) / 100} m/sec²
-
-                accelerationIncludingGravity
-                .x: ${Math.round(g.x * 100) / 100} m/sec²
-                .y: ${Math.round(g.y * 100) / 100} m/sec²
-                .z: ${Math.round(g.z * 100) / 100} m/sec²
-
-                rotationRate
-                .alpha: ${Math.round(r.alpha * 100) / 100} °/sec
-                .beta: ${Math.round(r.beta * 100) / 100} °/sec
-                .gamma: ${Math.round(r.gamma * 100) / 100} °/sec
-
-                interval: ${Math.round(i * 100) / 100} ms
-              `.trim();
-              values.style.display = 'block';
+          window.addEventListener('devicemotion', (d) => {
+            for (const [k, v] of Object.entries(d.acceleration)) {
+              const e = document.querySelector(`.acceleration.${k}`);
+              if (e) return;
+              e.innerText = `${k}: ${Math.round(v * 100) / 100} m/sec²`;
+              e.style.backgroundPosition = `${v * 10 + 50}%`;
             }
-          );
+            for (const [k, v] of Object.entries(d.accelerationIncludingGravity)) {
+              const e = document.querySelector(`.accelerationIncludingGravity.${k}`);
+              if (e) return;
+              e.innerText = `${k}: ${Math.round(v * 100) / 100} m/sec²`;
+              e.style.backgroundPosition = `${v * 10 + 50}%`;
+            }
+            for (const [k, v] of Object.entries(d.rotationRate)) {
+              const e = document.querySelector(`.rotationRate.${k}`);
+              if (e) return;
+              e.innerText = `${k}: ${Math.round(v * 100) / 100} °/sec`;
+              e.style.backgroundPosition = `${v + 50}%`;
+            }
+          });
         });
     </script>
   </body>
