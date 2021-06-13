@@ -33,59 +33,45 @@
     <h2>Geolocation</h2>
     <h3>Verwenden von geolocation</h3>
     <p>
-      Die "geolocation"-API ermöglicht es Nutzern, einer Web-Applikation die
-      eigene Position mitzuteilen. Um die Privatsphäre des Nutzers zu schützen,
-      wird dieser vorher um Erlaubnis gebeten und muss der Übermittlung
-      zustimmen.
+      Die "geolocation"-API ermöglicht es Nutzern, einer Web-Applikation die eigene Position mitzuteilen. Um die
+      Privatsphäre des Nutzers zu schützen, wird dieser vorher um Erlaubnis gebeten und muss der Übermittlung zustimmen.
     </p>
     <h3>Das geolocation-Objekt</h3>
+    <p>Die geolocation-API wird durch das navigator.geolocation-Objekt offengelegt.</p>
     <p>
-      Die geolocation-API wird durch das navigator.geolocation-Objekt
-      offengelegt.
-    </p>
-    <p>
-      Wenn das Objekt existiert, sind die geolocation-Services vorhanden und
-      nutzbar. Sie können die Funktionstüchtigkeit daher wie folgt testen:
+      Wenn das Objekt existiert, sind die geolocation-Services vorhanden und nutzbar. Sie können die
+      Funktionstüchtigkeit daher wie folgt testen:
     </p>
     <h3>Die derzeitige Position abfragen</h3>
     <a href="geolocation-1.html">Demo getCurrentPosition</a>
     <p>
-      Um die derzeitige Position des Nutzers zu erhalten, können Sie die Methode
-      getCurrentPosition() aufrufen. Dies startet eine asynchrone Anfrage für
-      den Abruf der Position zu initiieren. Wenn die Position erhalten wurde,
-      wird die übergebene Callback-Funktion ausgeführt. Sie können optional auch
-      eine zweite Callback-Funktion übergeben, welche im Falle eines Fehlers
-      ausgeführt wird. Ein dritter, optionaler Parameter ist ein
-      Konfigurationsobjekt, in dem Sie das maximale Alter der zurückgegeben
-      Position, die maximale Wartezeit für die Anfrage und den Wunsch für eine
-      hohe Genauigkeit festlegegen können.
+      Um die derzeitige Position des Nutzers zu erhalten, können Sie die Methode getCurrentPosition() aufrufen. Dies
+      startet eine asynchrone Anfrage für den Abruf der Position zu initiieren. Wenn die Position erhalten wurde, wird
+      die übergebene Callback-Funktion ausgeführt. Sie können optional auch eine zweite Callback-Funktion übergeben,
+      welche im Falle eines Fehlers ausgeführt wird. Ein dritter, optionaler Parameter ist ein Konfigurationsobjekt, in
+      dem Sie das maximale Alter der zurückgegeben Position, die maximale Wartezeit für die Anfrage und den Wunsch für
+      eine hohe Genauigkeit festlegegen können.
     </p>
     <p>
-      Notiz: Standardmäßig versucht getCurrentPosition() so schnell wie möglich
-      mit einer geringen Genauigkeit zu antworten. Es ist nützlich wenn Sie eine
-      schnelle Antwort benötigen, unabhängig von der Genauigkeit. Beispielsweise
-      Geräte mit einem GPS können eine Minute oder länger benötigen um eine neue
-      Position zu erhalten, also kann es möglich sein, dass weniger genaue Daten
-      (Ort der IP oder von WLANs) zurückgegeben werden.
+      Notiz: Standardmäßig versucht getCurrentPosition() so schnell wie möglich mit einer geringen Genauigkeit zu
+      antworten. Es ist nützlich wenn Sie eine schnelle Antwort benötigen, unabhängig von der Genauigkeit.
+      Beispielsweise Geräte mit einem GPS können eine Minute oder länger benötigen um eine neue Position zu erhalten,
+      also kann es möglich sein, dass weniger genaue Daten (Ort der IP oder von WLANs) zurückgegeben werden.
     </p>
     <h3>Die derzeitige Position überwachen</h3>
     <p><a href="geolocation-2.html">Demo watchPosition</a></p>
     <p>
-      Wenn sich die Positionsdaten ändern (entweder über die Bewegung des
-      Gerätes oder den Erhalt genauere Geolokationsdaten), können Sie eine
-      Callback-Funktion erstellen, die mit der erneuerten Positionsinformation
-      arbeitet. Dies ist über die Funktion watchPosition() möglich, welche die
-      gleichen Eingabeparameter wie getCurrentPosition(). besitzt. Die
-      Callback-Funktion wird mehrere Male ausgeführt, dies erlaubt dem Browser
-      die Position aufgrund von Bewegungen oder genaueren Positionsdaten, durch
-      das Verwenden von anderen (langsameren) Methoden, zu erneuern. Die
-      Fehler-Callback-Funktion, welche wie auch in getCurrentPosition(), hier
-      optional ist, kann auch mehrfach aufgerufen werden.
+      Wenn sich die Positionsdaten ändern (entweder über die Bewegung des Gerätes oder den Erhalt genauere
+      Geolokationsdaten), können Sie eine Callback-Funktion erstellen, die mit der erneuerten Positionsinformation
+      arbeitet. Dies ist über die Funktion watchPosition() möglich, welche die gleichen Eingabeparameter wie
+      getCurrentPosition(). besitzt. Die Callback-Funktion wird mehrere Male ausgeführt, dies erlaubt dem Browser die
+      Position aufgrund von Bewegungen oder genaueren Positionsdaten, durch das Verwenden von anderen (langsameren)
+      Methoden, zu erneuern. Die Fehler-Callback-Funktion, welche wie auch in getCurrentPosition(), hier optional ist,
+      kann auch mehrfach aufgerufen werden.
     </p>
     <p>
-      Die Methode watchPosition() gibt eine numerische ID zurück, die für die
-      eindeutige Identifikation des Positionsüberwachers verwendet werden kann;
-      diese können Sie in der Methode clearWatch() nutzen, um die
+      Die Methode watchPosition() gibt eine numerische ID zurück, die für die eindeutige Identifikation des
+      Positionsüberwachers verwendet werden kann; diese können Sie in der Methode clearWatch() nutzen, um die
       Positionsüberwachung zu beenden.
     </p>
     <h3>Siehe auch</h3>
@@ -95,44 +81,37 @@
       >
     </p>
     <p>
-      <a href="https://www.w3.org/TR/geolocation/"
-        >https://www.w3.org/TR/geolocation/</a
-      >
+      <a href="https://www.w3.org/TR/geolocation/">https://www.w3.org/TR/geolocation/</a>
     </p>
 
     <h2>Device Orientation & Motion</h2>
     <h3>Window: deviceorientation event</h3>
     <p><a href="orientation.html">Demo deviceorientation</a></p>
     <p>
-      The deviceorientation event is fired when fresh data is available from an
-      orientation sensor about the current orientation of the device as compared
-      to the Earth coordinate frame. This data is gathered from a magnetometer
+      The deviceorientation event is fired when fresh data is available from an orientation sensor about the current
+      orientation of the device as compared to the Earth coordinate frame. This data is gathered from a magnetometer
       inside the device. See Orientation and motion data explained for details.
     </p>
 
     <h3>Window: devicemotion event</h3>
     <p><a href="motion.html">Demo devicemotion</a></p>
     <p>
-      The devicemotion event is fired at a regular interval and indicates the
-      amount of physical force of acceleration the device is receiving at that
-      time. It also provides information about the rate of rotation, if
-      available.
+      The devicemotion event is fired at a regular interval and indicates the amount of physical force of acceleration
+      the device is receiving at that time. It also provides information about the rate of rotation, if available.
     </p>
     <h3>Notes</h3>
     <p>
-      For environments closely follow updatd specification (such as iOS 13+),
-      the page must request a permission first by calling requestPermission().
-      The permission can only be brought up from a user gesture (tap/click).
+      For environments closely follow updatd specification (such as iOS 13+), the page must request a permission first
+      by calling requestPermission(). The permission can only be brought up from a user gesture (tap/click).
     </p>
     <p>
-      As per security considerations, iOS will auto-decline the
-      requestPermission call if the page is not loaded over HTTPS.
+      As per security considerations, iOS will auto-decline the requestPermission call if the page is not loaded over
+      HTTPS.
     </p>
 
     <h3>See also</h3>
     <p>
-      <a
-        href="https://developer.mozilla.org/en-US/docs/Web/API/Window/deviceorientation_event"
+      <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/deviceorientation_event"
         >https://developer.mozilla.org/en-US/docs/Web/API/Window/deviceorientation_event</a
       >
     </p>
@@ -142,8 +121,7 @@
       >
     </p>
     <p>
-      <a
-        href="https://developer.mozilla.org/en-US/docs/Web/API/Window/devicemotion_event"
+      <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/devicemotion_event"
         >https://developer.mozilla.org/en-US/docs/Web/API/Window/devicemotion_event</a
       >
     </p>
@@ -153,14 +131,12 @@
       >
     </p>
     <p>
-      <a
-        href="https://developer.mozilla.org/en-US/docs/Web/Events/Orientation_and_motion_data_explained"
+      <a href="https://developer.mozilla.org/en-US/docs/Web/Events/Orientation_and_motion_data_explained"
         >https://developer.mozilla.org/en-US/docs/Web/Events/Orientation_and_motion_data_explained</a
       >
     </p>
     <p>
-      <a
-        href="https://developers.google.com/web/fundamentals/native-hardware/device-orientation"
+      <a href="https://developers.google.com/web/fundamentals/native-hardware/device-orientation"
         >https://developers.google.com/web/fundamentals/native-hardware/device-orientation</a
       >
     </p>

@@ -3,10 +3,7 @@
   <head>
     <title>Orientation</title>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <style>
       html,
       body {
@@ -50,10 +47,7 @@
     </style>
   </head>
   <body>
-    <img
-      id="image"
-      src="https://upload.wikimedia.org/wikipedia/commons/1/1a/Brosen_windrose.svg"
-    />
+    <img id="image" src="https://upload.wikimedia.org/wikipedia/commons/1/1a/Brosen_windrose.svg" />
     <div id="values"></div>
     <button id="button">deviceorientation</button>
     <script>
@@ -67,16 +61,13 @@
             DeviceOrientationEvent.requestPermission().then((s) => {
               if (s !== 'granted') alert('Permission not granted');
             });
-          window.addEventListener(
-            'deviceorientation',
-            ({ alpha, beta, gamma }) => {
-              image.style.transform = `rotateZ(${alpha}deg) rotateX(${-beta}deg) rotateY(${gamma}deg)`;
-              values.innerText = `alpha: ${Math.round(alpha * 100) / 100}°
+          window.addEventListener('deviceorientation', ({ alpha, beta, gamma }) => {
+            image.style.transform = `rotateZ(${alpha}deg) rotateX(${-beta}deg) rotateY(${gamma}deg)`;
+            values.innerText = `alpha: ${Math.round(alpha * 100) / 100}°
                 beta: ${Math.round(beta * 100) / 100}°
                 gamma: ${Math.round(gamma * 100) / 100}°`;
-              values.style.display = 'block';
-            }
-          );
+            values.style.display = 'block';
+          });
         });
     </script>
   </body>

@@ -3,10 +3,7 @@
   <head>
     <title>Motion</title>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <style>
       html,
       body {
@@ -58,12 +55,7 @@
             });
           window.addEventListener(
             'devicemotion',
-            ({
-              acceleration: a = {},
-              accelerationIncludingGravity: g = {},
-              rotationRate: r = {},
-              interval: i,
-            }) => {
+            ({ acceleration: a = {}, accelerationIncludingGravity: g = {}, rotationRate: r = {}, interval: i }) => {
               values.innerText = `
                 acceleration
                 .x: ${Math.round(a.x * 100) / 100} m/sec²

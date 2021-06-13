@@ -3,14 +3,8 @@
   <head>
     <title>Geolocation - watchPosition</title>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
-    <link
-      href="https://api.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.css"
-      rel="stylesheet"
-    />
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.css" rel="stylesheet" />
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.js"></script>
     <style>
       html,
@@ -48,8 +42,7 @@
     <button id="button">watchPosition</button>
     <script>
       const map = new mapboxgl.Map({
-        accessToken:
-          'pk.eyJ1Ijoid2FzdGVodW50ZXIiLCJhIjoiY2twcnkzMTZsMGpqazJ3cWt3MjVrZjhnbSJ9.KGIJ7Me0wtMYGFEc0gPkjg',
+        accessToken: 'pk.eyJ1Ijoid2FzdGVodW50ZXIiLCJhIjoiY2twcnkzMTZsMGpqazJ3cWt3MjVrZjhnbSJ9.KGIJ7Me0wtMYGFEc0gPkjg',
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v11',
         center: [8, 47],
@@ -68,27 +61,18 @@
             return;
           }
           watch = navigator.geolocation.watchPosition(
-            ({
-              coords: { latitude, longitude, accuracy, speed },
-              timestamp,
-            }) => {
+            ({ coords: { latitude, longitude, accuracy, speed }, timestamp }) => {
               button.innerText = 'clearWatch';
-              map.flyTo({
-                center: [longitude, latitude],
-                zoom: 17,
-                speed: 3,
-              });
+              map.flyTo({ center: [longitude, latitude], zoom: 17, speed: 3 });
               marker
                 .setLngLat([longitude, latitude])
                 .setPopup(
-                  new mapboxgl.Popup({
-                    focusAfterOpen: false,
-                  }).setText(
+                  new mapboxgl.Popup({ focusAfterOpen: false }).setText(
                     `latitude: ${latitude}
-                longitude: ${longitude}
-                accuracy: ${Math.round(accuracy * 100) / 100} m
-                speed: ${Math.round(speed * 100) / 100} m/s
-                time: ${new Date(timestamp).toLocaleString()}`
+                    longitude: ${longitude}
+                    accuracy: ${Math.round(accuracy * 100) / 100} m
+                    speed: ${Math.round(speed * 100) / 100} m/s
+                    time: ${new Date(timestamp).toLocaleString()}`
                   )
                 )
                 .addTo(map)
