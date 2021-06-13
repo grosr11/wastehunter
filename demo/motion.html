@@ -18,7 +18,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 50px 150px;
+        padding: 50px;
         box-sizing: border-box;
       }
       #button {
@@ -79,19 +79,19 @@
           window.addEventListener('devicemotion', (d) => {
             for (const [k, v] of Object.entries(d.acceleration)) {
               const e = document.querySelector(`.acceleration.${k}`);
-              if (e) return;
+              if (!e) return;
               e.innerText = `${k}: ${Math.round(v * 100) / 100} m/sec²`;
               e.style.backgroundPosition = `${v * 10 + 50}%`;
             }
             for (const [k, v] of Object.entries(d.accelerationIncludingGravity)) {
               const e = document.querySelector(`.accelerationIncludingGravity.${k}`);
-              if (e) return;
+              if (!e) return;
               e.innerText = `${k}: ${Math.round(v * 100) / 100} m/sec²`;
               e.style.backgroundPosition = `${v * 10 + 50}%`;
             }
             for (const [k, v] of Object.entries(d.rotationRate)) {
               const e = document.querySelector(`.rotationRate.${k}`);
-              if (e) return;
+              if (!e) return;
               e.innerText = `${k}: ${Math.round(v * 100) / 100} °/sec`;
               e.style.backgroundPosition = `${v + 50}%`;
             }
