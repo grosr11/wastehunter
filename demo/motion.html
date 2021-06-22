@@ -67,8 +67,7 @@
     </div>
     <button id="button">devicemotion</button>
     <script>
-      const values = document.getElementById('values'),
-        button = document.getElementById('button');
+      const button = document.getElementById('button');
 
       if (window.DeviceMotionEvent)
         button.addEventListener('click', () => {
@@ -76,6 +75,7 @@
             DeviceMotionEvent.requestPermission().then((p) => {
               if (p !== 'granted') alert('Permission not granted');
             });
+
           window.addEventListener('devicemotion', (d) => {
             for (const [k, v] of Object.entries(d.acceleration)) {
               const e = document.querySelector(`.acceleration.${k}`);
@@ -97,6 +97,9 @@
             }
           });
         });
+
+      // https://w3c.github.io/deviceorientation/#devicemotion
+      // https://developer.mozilla.org/en-US/docs/Web/API/Window/devicemotion_event
     </script>
   </body>
 </html>
